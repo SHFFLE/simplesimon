@@ -4,26 +4,32 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        #buttonscontainer{
+            position:relative;
+            width: 80%;
+            height: 80%;
+        }
         div {
-            width: 300px;
-            height: 300px;
+            position: absolute;
+
+            width: 50%;
+            height: 50%;
         }
         #red {
-            background-color: red;
-            float: left
+            top: 0;
+            left: 0;
         }
         #green {
-            background-color: green;
-            float: left
+            top: 0;
+            left: 50%;
         }
         #blue {
-            background-color: blue;
-            clear: both;
-            float: left;
+            top: 50%;
+            left: 0;
         }
         #yellow {
-            background-color: yellow;
-            float: left;
+            top:50%;
+            left: 50%;
         }
         button {
             float: left;
@@ -31,18 +37,29 @@
             width: 200px;
             clear:both;
         }
+        #backgroundsquares {
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
-    <div id="red"></div>
-    <div id="green"></div>
-    <div id="blue"></div>
-    <div id="yellow"></div>
+<div id="buttonscontainer">
+    <img id="backgroundsquares" src="img/squares.png">
+    <div id="red"><img src="img/red.png"></div>
+    <div id="green"><img src="img/green.png"></div>
+    <div id="blue"><img src="img/blue.png"></div>
+    <div id="yellow"><img src="img/yellow.png"></div>
+</div>
     <button>Start</button>
 
     <script src="js/howler.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         var randomized = '';
         var entered = '';
@@ -73,11 +90,7 @@
             if(clickable == false) {
             } else {
                 entered += "r";
-                red.animate({
-                    backgroundColor: "pink"
-                }, 300).animate({
-                    backgroundColor: "red"
-                }, 300);
+                red.fadeOut(300).fadeIn(300);
                 clickable = false;
                 if(entered.substring(0) != randomized.substring(0, entered.length)){
                     entered = '';
@@ -100,11 +113,7 @@
             if(clickable == false) {
             } else {
                 entered += "b";
-                blue.animate({
-                    backgroundColor: "light-blue"
-                }, 300).animate({
-                    backgroundColor: "blue"
-                }, 300);
+                blue.fadeOut(300).fadeIn(300);
                 clickable = false;
                 if(entered.substring(0) != randomized.substring(0, entered.length)){
                     entered = '';
@@ -127,11 +136,7 @@
             if(clickable == false) {
             } else {
                 entered += "g";
-                green.animate({
-                    backgroundColor: "light-green"
-                }, 300).animate({
-                    backgroundColor: "green"
-                }, 300);
+                green.fadeOut(300).fadeIn(300);
                 clickable = false;
                 if(entered.substring(0) != randomized.substring(0, entered.length)){
                     entered = '';
@@ -154,11 +159,7 @@
             if(clickable == false) {
             } else {
                 entered += "y";
-                yellow.animate({
-                    backgroundColor: "orange"
-                }, 300).animate({
-                    backgroundColor: "yellow"
-                }, 300);
+                yellow.fadeOut(300).fadeIn(300);
                 clickable = false;
                 if(entered.substring(0) != randomized.substring(0, entered.length)){
                     entered = '';
@@ -204,35 +205,19 @@
                 var color = randomized.charAt(i);
                 if(randomized.charAt(i) == 'r'){
                     console.log("animating red");
-                    red.animate({
-                        backgroundColor: "pink"
-                    }, 300).animate({
-                        backgroundColor: "red"
-                    }, 300);
+                    red.fadeOut(300).fadeIn(300);
                     sound.play('red');
                 } else if (randomized.charAt(i) == 'g') {
                     console.log("animating green");
-                    green.animate({
-                        backgroundColor: "light-green"
-                    }, 300).animate({
-                        backgroundColor: "green"
-                    }, 300);
+                    green.fadeOut(300).fadeIn(300);
                     sound.play('green');
                 } else if (randomized.charAt(i) == 'b') {
                     console.log("animating blue");
-                    blue.animate({
-                        backgroundColor: "light-blue"
-                    }, 300).animate({
-                        backgroundColor: "blue"
-                    }, 300);
+                    blue.fadeOut(300).fadeIn(300);
                     sound.play('blue');
                 } else if (randomized.charAt(i) == 'y') {
                     console.log("animating yellow");
-                    yellow.animate({
-                        backgroundColor: "orange"
-                    }, 300).animate({
-                        backgroundColor: "yellow"
-                    }, 300);
+                    yellow.fadeOut(300).fadeIn(300);
                     sound.play('yellow');
                 } else {
                     console.log("WTF is happening? color " + color + " i " + i);
