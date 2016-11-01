@@ -5,17 +5,301 @@
     <title>Title</title>
     <style>
         div {
-            
+            width: 300px;
+            height: 300px;
         }
         #red {
-
+            background-color: red;
+            float: left
+        }
+        #green {
+            background-color: green;
+            float: left
+        }
+        #blue {
+            background-color: blue;
+            clear: both;
+            float: left;
+        }
+        #yellow {
+            background-color: yellow;
+            float: left;
+        }
+        button {
+            float: left;
+            height: 200px;
+            width: 200px;
+            clear:both;
         }
     </style>
 </head>
 <body>
-    <div id="red"></div>
+<audio id="redsound" preload="auto"><source src="sounds/Confirm.mp3"></audio>
+<audio id="greensound" preload="auto"><source src="sounds/Confirm_Dialog.mp3"></audio>
+<audio id="bluesound" preload="auto"><source src="sounds/Curious_Chime.mp3"></audio>
+<audio id="yellowsound" preload="auto"><source src="sounds/Happy.mp3"></audio>
+<audio id="fail" preload="auto"><source src="sounds/Error.mp3"></audio>
+
+<div id="red"></div>
     <div id="green"></div>
     <div id="blue"></div>
     <div id="yellow"></div>
+    <button>Start</button>
+    <script src="js/howler.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        var randomized = '';
+        var entered = '';
+        var clickable = false;
+        var score = 0;
+        var red = $('#red');
+        var blue = $('#blue');
+        var green = $('#green');
+        var yellow = $('#yellow');
+
+        var redSound = document.getElementById("redsound");
+        function playRed(){
+            redSound.play();
+        }
+        var blueSound = document.getElementById("bluesound");
+function playBlue(){
+    blueSound.play();
+}
+        var greenSound = document.getElementById("greensound");
+function playGreen(){
+    greenSound.play();
+}
+        var yellowSound = document.getElementById("yellowsound");
+function playYellow(){
+    yellowSound.play();
+}
+var fail = document.getElementById("fail");
+function failed(){
+    fail.play();
+}
+
+        var randomizer = function(){return Math.floor(Math.random() * 4)};
+        $('button').click(function(){
+            randomized = '';
+            alert("Starting now!");
+            animateOld();
+        });
+        red.click(function(){
+            if(clickable == false) {
+            } else {
+                entered += "r";
+                playRed();
+                red.animate({
+                    backgroundColor: "pink"
+                }, 800).animate({
+                    backgroundColor: "red"
+                }, 800);
+                clickable = false;
+                if(entered.substring(0) != randomized.substring(0, entered.length)){
+                    entered = '';
+                    randomized = '';
+                    failed();
+                    alert("You lose! Score: "+ score + " || Try again.");
+                    score = 0;
+
+                } else if (entered == randomized) {
+                    setTimeout(function(){animateOld();}, 1500);
+                    entered = '';
+                    score ++;
+                } else {
+                    clickable = true;
+                }
+
+            }
+        });
+        blue.click(function(){
+            if(clickable == false) {
+            } else {
+
+                entered += "b";
+                playBlue();
+                blue.animate({
+                    backgroundColor: "light-blue"
+                }, 800).animate({
+                    backgroundColor: "blue"
+                }, 800);
+                clickable = false;
+                if(entered.substring(0) != randomized.substring(0, entered.length)){
+                    entered = '';
+                    randomized = '';
+                    failed();
+
+                    alert("You lose! Score: "+ score + " || Try again.");
+                    score = 0;
+
+                } else if (entered == randomized) {
+                    setTimeout(function(){animateOld();}, 1500);
+                    entered = '';
+                    score ++;
+                } else {
+                    clickable = true;
+                }
+
+            }
+        });
+        green.click(function(){
+            if(clickable == false) {
+            } else {
+                entered += "g";
+                playGreen();
+                green.animate({
+                    backgroundColor: "light-green"
+                }, 800).animate({
+                    backgroundColor: "green"
+                }, 800);
+                clickable = false;
+                if(entered.substring(0) != randomized.substring(0, entered.length)){
+                    entered = '';
+                    randomized = '';
+                    failed();
+
+                    alert("You lose! Score: "+ score + " || Try again.");
+                    score = 0;
+
+                } else if (entered == randomized) {
+                    setTimeout(function(){animateOld();}, 1500);
+                    entered = '';
+                    score ++;
+                } else {
+                    clickable = true;
+                }
+
+            }
+        });
+        yellow.click(function(){
+            if(clickable == false) {
+            } else {
+                entered += "y";
+                playYellow();
+                yellow.animate({
+                    backgroundColor: "orange"
+                }, 800).animate({
+                    backgroundColor: "yellow"
+                }, 800);
+                clickable = false;
+                if(entered.substring(0) != randomized.substring(0, entered.length)){
+                    entered = '';
+                    randomized = '';
+                    failed();
+
+                    alert("You lose! Score: "+ score + " || Try again.");
+                    score = 0;
+
+                } else if (entered == randomized) {
+                    setTimeout(function(){animateOld();}, 1500);
+                    entered = '';
+                    score ++;
+                } else {
+                    clickable = true;
+                }
+
+            }
+        });
+
+
+//        if (kkeys.substring(0) != konamicode.substring(0, kkeys.length)) {
+//            kkeys = '';
+//        } else if (kkeys == konamicode) {
+//            alert('GG NO RE');
+//            kkeys = '';
+//        }
+
+        function rgby() {
+            var random = randomizer();
+            console.log(random);
+            if(random == 0){
+                randomized += 'r';
+//                console.log("animating red");
+//                red.animate({
+//                    backgroundColor: "pink"
+//                }, 200).animate({
+//                    backgroundColor: "red"
+//                }, 200);
+            } else if (random == 1) {
+                randomized += 'g';
+//                console.log("animating green");
+//                green.animate({
+//                    backgroundColor: "light-green"
+//                }, 200).animate({
+//                    backgroundColor: "green"
+//                }, 200);
+            } else if (random == 2) {
+                randomized += 'b';
+//                console.log("animating blue");
+//                blue.animate({
+//                    backgroundColor: "light-blue"
+//                }, 200).animate({
+//                    backgroundColor: "blue"
+//                }, 200);
+            } else {
+                randomized += 'y';
+//                console.log("animating yellow");
+//                yellow.animate({
+//                    backgroundColor: "orange"
+//                }, 200).animate({
+//                    backgroundColor: "yellow"
+//                }, 200);
+            }
+            console.log('randomized = ' + randomized);
+            clickable = true;
+        }
+        function animateOld() {
+                var i = 0;
+                rgby();
+                var IntervalOne = setInterval(function(){
+                console.log("i = " + i);
+                console.log(randomized.charAt(i));
+                var color = randomized.charAt(i);
+                if(randomized.charAt(i) == 'r'){
+                    console.log("animating red");
+                    red.animate({
+                        backgroundColor: "pink"
+                    }, 500).animate({
+                        backgroundColor: "red"
+                    }, 500);
+                    playRed();
+                } else if (randomized.charAt(i) == 'g') {
+                    console.log("animating green");
+                    green.animate({
+                        backgroundColor: "light-green"
+                    }, 500).animate({
+                        backgroundColor: "green"
+                    }, 500);
+                    playGreen();
+                } else if (randomized.charAt(i) == 'b') {
+                    console.log("animating blue");
+                    blue.animate({
+                        backgroundColor: "light-blue"
+                    }, 500).animate({
+                        backgroundColor: "blue"
+                    }, 500);
+                    playBlue();
+                } else if (randomized.charAt(i) == 'y') {
+                    console.log("animating yellow");
+                    yellow.animate({
+                        backgroundColor: "orange"
+                    }, 500).animate({
+                        backgroundColor: "yellow"
+                    }, 500);
+                    playYellow();
+                } else {
+                    console.log("WTF is happening? color " + color + " i " + i);
+                }
+                if(i == randomized.length - 1){
+                    clearInterval(IntervalOne)
+                } else {
+                    i++;
+                }
+                }, 1600);
+
+
+        }
+    </script>
 </body>
 </html>
