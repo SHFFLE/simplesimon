@@ -223,7 +223,12 @@
                 red: [2000, 2000],
                 blue: [4000, 2500],
                 green: [7000, 1000],
-                yellow: [8000, 2000]
+                yellow: [8000, 2000],
+                start: [9000, 2000],
+                mixed: [12000, 4000],
+                ice: [16000, 1000],
+                age: [17000, 2000],
+                ingredient: [19000, 2000]
             }
         });
 
@@ -456,6 +461,7 @@
 
         cbam.click(function(){
             if(clickable == true || gameactive == false) {
+                sound.play('start');
                 if (mixingdrinksandchanginglives == false) {
                     mixingdrinksandchanginglives = true;
                     entered = '';
@@ -529,6 +535,7 @@
                 if(number[instance.indexOf("Adelhyde")] == 20) {
                     console.log("No more room for Adelhyde");
                 } else{
+                    sound.play('ingredient');
                     console.log("Adding Adelhyde");
                     mix.push("Adelhyde");
                     adelhydecountvalue ++;
@@ -546,6 +553,7 @@
                 if(number[instance.indexOf("Bronson")] == 20) {
                     console.log("No more room for Bronson");
                 } else{
+                    sound.play('ingredient');
                     console.log("Adding Bronson");
                     mix.push("Bronson");
                     bronsoncountvalue ++;
@@ -563,6 +571,7 @@
                 if(number[instance.indexOf("Delta")] == 20) {
                     console.log("No more room for Delta");
                 } else{
+                    sound.play('ingredient');
                     console.log("Adding Delta");
                     mix.push("Delta");
                     deltacountvalue ++;
@@ -580,6 +589,7 @@
                 if(number[instance.indexOf("Flanergide")] == 20) {
                     console.log("No more room for Flanergide");
                 } else{
+                    sound.play('ingredient');
                     console.log("Adding Flanergide");
                     mix.push("Flanergide");
                     flanergidecountvalue ++;
@@ -597,6 +607,7 @@
                 if(number[instance.indexOf("Karmotrine")] == 20) {
                     console.log("No more room for Karmotrine");
                 } else{
+                    sound.play('ingredient');
                     console.log("Adding Karmotrine");
                     mix.push("Karmotrine");
                     karmotrinecountvalue ++;
@@ -612,6 +623,7 @@
                     mix.splice(mix.indexOf("Rocks"));
                     rocks.html("<img src='img/rocksinactive.png'>");
                 } else {
+                    sound.play('ice');
                     mix.push("Rocks");
                     rocks.html("<img src='img/rocks.png'>");
                 }
@@ -625,6 +637,7 @@
                     mix.splice(mix.indexOf("Age"));
                     age.html("<img src='img/ageinactive.png'>");
                 } else {
+                    sound.play('age');
                     mix.push("Age");
                     age.html("<img src='img/age.png'>");
                 }
@@ -648,6 +661,7 @@
             if(mixingdrinksandchanginglives == false){
             } else if(mix == []){
             } else {
+                sound.play('mixed');
                 adelhydecountvalue = 0;
                 adelhydecount.html(adelhydecountvalue);
                 bronsoncountvalue = 0;
@@ -671,6 +685,7 @@
             if(mixingdrinksandchanginglives == false){
             } else if(mix == []){
             } else {
+                sound.play('mixed');
                 mix.push("Mixed");
                 var result = false;
                 mix.sort();
