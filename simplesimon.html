@@ -136,10 +136,16 @@
         #blended {
             opacity: 0.4;
         }
+        .music {
+            display:none;
+        }
+        .music .active {
+            display: inline;
+        }
     </style>
 </head>
 <body>
-<audio id="music" loop preload controls src="sounds/KarmotrineDream.mp3"></audio>
+<audio id="music" preload controls src="sounds/KarmotrineDream.mp3"></audio>
 
 <!-- Simon -->
 
@@ -234,8 +240,29 @@
 
 
         var music = document.getElementById('music');
+        var musici = 0;
         setTimeout(function(){music.play()}, 1000);
+        musici ++;
         music.volume = 0.6;
+
+        music.addEventListener('ended', function(e){
+            if(musici == 3){
+                musici = 0;
+            }
+            if(musici == 0){
+                music.setAttribute("src", "sounds/KarmotrineDream.mp3");
+                setTimeout(function(){music.play()});
+                setTimeout(function(){musici ++}, 2000);
+            } else if(musici == 1){
+                music.setAttribute("src", "sounds/Welcome.mp3");
+                setTimeout(function(){music.play()});
+                setTimeout(function(){musici ++}, 2000);
+            } else if (musici == 2){
+                music.setAttribute("src", "sounds/FriendlyConversation.mp3");
+                setTimeout(function(){music.play()});
+                setTimeout(function(){musici ++}, 2000);
+            }
+        });
 
 //        Simon code vv
 
