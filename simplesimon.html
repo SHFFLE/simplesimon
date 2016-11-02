@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Simon</title>
     <style>
         body {
             background-color: lightslategrey;
+            background-image: url("img/gcjill.jpg");
+            background-repeat: no-repeat;
+            background-size: 100%, 100%;
         }
         #buttonscontainer{
             position:relative;
@@ -20,6 +23,7 @@
             max-width: 50%;
             max-height: 100%;
             margin: 0;
+            color: white;
         }
         #red {
             top: 0;
@@ -54,9 +58,14 @@
             width: 100%;
             height: 100%;
         }
+        audio {
+            float: right;
+            width: 400px;
+        }
     </style>
 </head>
 <body>
+<audio id="music" loop preload controls src="sounds/KarmotrineDream.mp3"></audio>
 <div id="buttonscontainer">
     <img id="backgroundsquares" src="img/squares.png">
     <div id="red"><img src="img/red.png"></div>
@@ -65,6 +74,8 @@
     <div id="yellow"><img src="img/yellow.png"></div>
 </div>
     <button>Start</button>
+<div id="cbam">Cyberpunk Bartender Action Mode</div> <!-- Super less than secret second game! :O -->
+
 
     <script src="js/howler.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -87,8 +98,13 @@
                 yellow: [8000, 2000]
             }
         });
+        var cbam = $('#cbam'); // Unused ATM for super-not-very-hidden secondary game I may add
+        var music = document.getElementById('music');
+        setTimeout(function(){music.play()}, 1000);
+        music.volume = 0.6;
 
         var randomizer = function(){return Math.floor(Math.random() * 4)};
+
         $('button').click(function(){
             randomized = '';
             alert("Starting now!");
@@ -98,7 +114,7 @@
             if(clickable == false) {
             } else {
                 entered += "r";
-                red.fadeOut(300).fadeIn(300);
+                red.fadeOut(100).fadeIn(100);
                 clickable = false;
                 if(entered.substring(0) != randomized.substring(0, entered.length)){
                     entered = '';
@@ -121,7 +137,7 @@
             if(clickable == false) {
             } else {
                 entered += "b";
-                blue.fadeOut(300).fadeIn(300);
+                blue.fadeOut(100).fadeIn(100);
                 clickable = false;
                 if(entered.substring(0) != randomized.substring(0, entered.length)){
                     entered = '';
@@ -144,7 +160,7 @@
             if(clickable == false) {
             } else {
                 entered += "g";
-                green.fadeOut(300).fadeIn(300);
+                green.fadeOut(100).fadeIn(100);
                 clickable = false;
                 if(entered.substring(0) != randomized.substring(0, entered.length)){
                     entered = '';
@@ -167,7 +183,7 @@
             if(clickable == false) {
             } else {
                 entered += "y";
-                yellow.fadeOut(300).fadeIn(300);
+                yellow.fadeOut(100).fadeIn(100);
                 clickable = false;
                 if(entered.substring(0) != randomized.substring(0, entered.length)){
                     entered = '';
@@ -230,7 +246,7 @@
                     console.log("WTF is happening? color " + color + " i " + i);
                 }
                 if(i == randomized.length - 1){
-                    clearInterval(IntervalOne)
+                    clearInterval(IntervalOne);
                     clickable = true;
                 } else {
                     i++;
