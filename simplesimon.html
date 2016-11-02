@@ -69,7 +69,7 @@
         #dranks {
             position: relative;
             float:left;
-            width: 40%;
+            width: 50%;
         }
         #dranks div {
             position: relative;
@@ -113,10 +113,16 @@
         #ltbluekarmotrine {
             color: lightblue;
         }
+        .count {
+            font-size: 3em;
+        }
     </style>
 </head>
 <body>
 <audio id="music" loop preload controls src="sounds/KarmotrineDream.mp3"></audio>
+
+<!-- Simon -->
+
 <div id="buttonscontainer">
     <img id="backgroundsquares" src="img/squares.png">
     <div id="red"><img src="img/red.png"></div>
@@ -124,26 +130,52 @@
     <div id="blue"><img src="img/blue.png"></div>
     <div id="yellow"><img src="img/yellow.png"></div>
 </div>
-    <button id="start">Start</button>
-<h1 id="cbam">Cyberpunk Bartender Action Mode</h1> <!-- Super less than secret second game! :O -->
+<button id="start">Start</button>
+
+<!-- Super less than secret second game! :O -->
+
+<h1 id="cbam">Cyberpunk Bartender Action Mode</h1>
 <div id="dranks">
-    <div id="adelhyde"><img src="img/adelhyde.png" alt=""></div>
-    <div id="bronson"><img src="img/bronsonextract.png" alt=""></div>
-    <div id="delta"><img src="img/powdereddelta.png" alt=""></div>
-    <div id="flanergide"><img src="img/flanergide.png" alt=""></div>
-    <div id="karmotrine"><img src="img/karmotrine.png" alt=""></div>
+    <div id="adelhyde">
+        <div class="count">Adelhyde</div>
+        <img src="img/adelhyde.png" alt="">
+        <div id="adelhydecount" class="count">0</div>
+    </div>
+    <div id="bronson">
+        <div class="count">Bronson Extract</div>
+        <img src="img/bronsonextract.png" alt="">
+        <div id="bronsoncount" class="count">0</div>
+    </div>
+    <div id="delta">
+        <div class="count">Powdered Delta</div>
+        <img src="img/powdereddelta.png" alt="">
+        <div id="deltacount" class="count">0</div>
+    </div>
+    <div id="flanergide">
+        <div class="count">Flanergide</div>
+        <img src="img/flanergide.png" alt="">
+        <div id="flanergidecount" class="count">0</div>
+    </div>
+    <div id="karmotrine">
+        <div class="count">Karmotrine</div>
+        <img src="img/karmotrine.png" alt="">
+        <div id="karmotrinecount" class="count">0</div>
+    </div>
     <div id="rocks"><img src="img/rocks.png" alt=""></div>
     <div id="age"><img src="img/age.png" alt=""></div>
     <div id="mixed"><img src="img/mixer.png" alt=""></div>
     <div id="blended">blend</div>
 </div>
 <div id="display">
-    <button>left</button><button>right</button>
+    <button id="left">left</button><button id="right">right</button>
     <div id="id"></div>
     <div id="drink"></div>
     <div id="recipe"></div>
     <div id="description"></div>
+    <div id="tags"></div>
 </div>
+
+
 <script src="js/recipes.js"></script>
 <script src="js/howler.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -158,62 +190,12 @@
         var yellow = $('#yellow');
         var background = $('#backgroundsquares');
         var start = $('#start');
-        var dranks = $('#dranks');
-        var adelhyde = $('#adelhyde');
-        var bronson = $('#bronson');
-        var delta = $('#delta');
-        var flanergide = $('#flanergide');
-        var karmotrine = $('#karmotrine');
-        var rocks = $('#rocks');
-        var age = $('#age');
-        var mixer = $('#mixed');
-        var blend = $('#blended');
-        var display = $('#display');
-        var id = $('#id');
-        var drink = $('#drink');
-        var recipe = $('#recipe');
-        var description = $('#description');
+
         dranks.fadeOut(0);
         display.fadeOut(0);
-        var mix = [];
-        var mixingdrinksandchanginglives = false;
 
-        var cbam = $('#cbam'); // Unused ATM for super-not-very-hidden secondary game I may add
-        console.log(recipes);
-        cbam.click(function(){
-            if(mixingdrinksandchanginglives == false){
-                mixingdrinksandchanginglives = true;
-                red.fadeOut(500);
-                blue.fadeOut(500);
-                green.fadeOut(500);
-                yellow.fadeOut(500);
-                background.fadeOut(500);
-                start.fadeOut(500);
-                cbam.html("Cyberpunk Bartender Mode Engaged!");
-                cbam.css("font-size", "50px");
-                cbam.css("text-align", "center");
-                dranks.fadeIn(1000);
-                display.fadeIn(1000);
-            } else if (mixingdrinksandchanginglives == true){
-                mixingdrinksandchanginglives = false;
-                red.fadeIn(1000);
-                blue.fadeIn(1000);
-                green.fadeIn(1000);
-                yellow.fadeIn(1000);
-                background.fadeIn(1000);
-                start.fadeIn(1000);
-                cbam.html("Ok, loser, <em>don't</em> play the game I painstakingly coded in. Meanie.")
-                cbam.css("font-size", "15px");
-                cbam.css("text-align", "left");
-                dranks.fadeOut(500);
-                display.fadeOut(500);
-            }
-            //Will move the following later, just testing.
-            id.html("ID: " + recipes[0].id);
-            drink.html(recipes[0].name);
-            recipe.html(recipes[0].recipeStr);
-            description.html(recipes[0].description);
-        });
+
+
         var sound = new Howl({
             src: ['sounds/soundsprite.ogg'],
             sprite: {
@@ -347,13 +329,13 @@
             console.log('randomized = ' + randomized);
         }
         function animateOld() {
-                var i = 0;
-                rgby();
-                var IntervalOne = setInterval(function(){
+            var i = 0;
+            rgby();
+            var IntervalOne = setInterval(function () {
                 console.log("i = " + i);
                 console.log(randomized.charAt(i));
                 var color = randomized.charAt(i);
-                if(randomized.charAt(i) == 'r'){
+                if (randomized.charAt(i) == 'r') {
                     console.log("animating red");
                     red.fadeOut(300).fadeIn(300);
                     sound.play('red');
@@ -372,14 +354,266 @@
                 } else {
                     console.log("WTF is happening? color " + color + " i " + i);
                 }
-                if(i == randomized.length - 1){
+                if (i == randomized.length - 1) {
                     clearInterval(IntervalOne);
                     clickable = true;
                 } else {
                     i++;
                 }
-                }, 800);
+            }, 800);
         }
+
+//        Start Variables for second game
+
+        var dranks = $('#dranks');
+        var adelhyde = $('#adelhyde');
+        var bronson = $('#bronson');
+        var delta = $('#delta');
+        var flanergide = $('#flanergide');
+        var karmotrine = $('#karmotrine');
+        var rocks = $('#rocks');
+        var age = $('#age');
+        var mixer = $('#mixed');
+        var blend = $('#blended');
+        var display = $('#display');
+        var id = $('#id');
+        var drink = $('#drink');
+        var recipe = $('#recipe');
+        var description = $('#description');
+        var tags = $('#tags');
+        var mix = [];
+        var mixingdrinksandchanginglives = false;
+        var left = $('#left');
+        var right = $('#right');
+        var i = 0;
+        var cbam = $('#cbam');
+        console.log(recipes);
+
+//        Checks for instances of each ingredient in the current mixture
+
+        function foo(arr) {
+            var a = [], b = [], prev;
+
+            arr.sort();
+            for ( var i = 0; i < arr.length; i++ ) {
+                if ( arr[i] !== prev ) {
+                    a.push(arr[i]);
+                    b.push(1);
+                } else {
+                    b[b.length-1]++;
+                }
+                prev = arr[i];
+            }
+
+            return [a, b];
+        }
+
+//        Initializes the second game - the entirety of the second game exists largely as a random decision of mine to give it a try.
+
+        cbam.click(function(){
+            if(mixingdrinksandchanginglives == false){
+                mixingdrinksandchanginglives = true;
+                red.fadeOut(500);
+                blue.fadeOut(500);
+                green.fadeOut(500);
+                yellow.fadeOut(500);
+                background.fadeOut(500);
+                start.fadeOut(500);
+                cbam.html("Cyberpunk Bartender Mode Engaged!");
+                cbam.css("font-size", "50px");
+                cbam.css("text-align", "center");
+                dranks.fadeIn(1000);
+                display.fadeIn(1000);
+                id.html("ID: " + recipes[i].id);
+                drink.html(recipes[i].name);
+                recipe.html(recipes[i].recipeStr);
+                description.html(recipes[i].description);
+                tags.html(recipes[i].tags);
+            } else if (mixingdrinksandchanginglives == true){
+                mixingdrinksandchanginglives = false;
+                red.fadeIn(1000);
+                blue.fadeIn(1000);
+                green.fadeIn(1000);
+                yellow.fadeIn(1000);
+                background.fadeIn(1000);
+                start.fadeIn(1000);
+                cbam.html("Ok, loser, <em>don't</em> play the game I painstakingly coded in. Meanie.")
+                cbam.css("font-size", "15px");
+                cbam.css("text-align", "left");
+                dranks.fadeOut(500);
+                display.fadeOut(500);
+            }
+        });
+
+        left.click(function(){
+            i--;
+            id.html("ID: " + recipes[i].id);
+            drink.html(recipes[i].name);
+            recipe.html(recipes[i].recipeStr);
+            description.html(recipes[i].description);
+            tags.html(recipes[i].tags);
+        });
+        right.click(function(){
+            i++;
+            id.html("ID: " + recipes[i].id);
+            drink.html(recipes[i].name);
+            recipe.html(recipes[i].recipeStr);
+            description.html(recipes[i].description);
+            tags.html(recipes[i].tags);
+        });
+
+        adelhyde.click(function(){
+            if(mixingdrinksandchanginglives == false){
+            } else {
+                var instances = foo(mix);
+                console.log(instances[1]);
+                var instance = instances[0];
+                var number = instances[1];
+                if(number[instance.indexOf("Adelhyde")] == 20) {
+                    console.log("No more room for Adelhyde");
+                    console.log(mix);
+                } else{
+                    console.log("Adding Adelhyde");
+                    mix.push("Adelhyde");
+                    console.log(mix);
+                }
+            }
+        });
+
+        bronson.click(function(){
+            if(mixingdrinksandchanginglives == false){
+            } else {
+                var instances = foo(mix);
+                console.log(instances[1]);
+                var instance = instances[0];
+                var number = instances[1];
+                if(number[instance.indexOf("Bronson")] == 20) {
+                    console.log("No more room for Bronson");
+                    console.log(mix);
+                } else{
+                    console.log("Adding Bronson");
+                    mix.push("Bronson");
+                    console.log(mix);
+                }
+            }
+        });
+
+        delta.click(function(){
+            if(mixingdrinksandchanginglives == false){
+            } else {
+                var instances = foo(mix);
+                console.log(instances[1]);
+                var instance = instances[0];
+                var number = instances[1];
+                if(number[instance.indexOf("Delta")] == 20) {
+                    console.log("No more room for Delta");
+                    console.log(mix);
+                } else{
+                    console.log("Adding Delta");
+                    mix.push("Delta");
+                    console.log(mix);
+                }
+            }
+        });
+
+        flanergide.click(function(){
+            if(mixingdrinksandchanginglives == false){
+            } else {
+                var instances = foo(mix);
+                console.log(instances[1]);
+                var instance = instances[0];
+                var number = instances[1];
+                if(number[instance.indexOf("Flanergide")] == 20) {
+                    console.log("No more room for Flanergide");
+                    console.log(mix);
+                } else{
+                    console.log("Adding Flanergide");
+                    mix.push("Flanergide");
+                    console.log(mix);
+                }
+            }
+        });
+
+        karmotrine.click(function(){
+            if(mixingdrinksandchanginglives == false){
+            } else {
+                var instances = foo(mix);
+                console.log(instances[1]);
+                var instance = instances[0];
+                var number = instances[1];
+                if(number[instance.indexOf("Karmotrine")] == 20) {
+                    console.log("No more room for Karmotrine");
+                    console.log(mix);
+                } else{
+                    console.log("Adding Karmotrine");
+                    mix.push("Karmotrine");
+                    console.log(mix);
+                }
+            }
+        });
+
+        rocks.click(function(){
+            if(mixingdrinksandchanginglives == false){
+            } else {
+                if(mix.indexOf("Rocks") >= 0 ){
+                    mix.splice(mix.indexOf("Rocks"));
+                    console.log(mix);
+                } else {
+                    mix.push("Rocks");
+                    console.log(mix);
+                }
+            }
+        });
+
+        age.click(function(){
+            if(mixingdrinksandchanginglives == false){
+            } else {
+                if(mix.indexOf("Age") >= 0 ){
+                    mix.splice(mix.indexOf("Age"));
+                    console.log(mix);
+                } else {
+                    mix.push("Age");
+                    console.log(mix);
+                }
+            }
+        });
+
+        blend.click(function(){
+            if(mixingdrinksandchanginglives == false){
+            } else {
+                if(mix.indexOf("Blend") >= 0 ){
+                    mix.splice(mix.indexOf("Blend"));
+                    console.log(mix);
+                } else {
+                    mix.push("Blend");
+                    console.log(mix);
+                }
+            }
+        });
+
+//        Does the actual comparison to see if the current mix matches any recipes.
+
+        mixer.click(function(){
+            if(mixingdrinksandchanginglives == false){
+            } else if(mix == []){
+            } else {
+                mix.push("Mixed");
+                var result = false;
+                mix.sort();
+                for(i = 0; i < recipes.length; i++){
+                    if(recipes[i].recipe.toString() == mix.toString()){
+                        alert("You made a " + recipes[i].name + "! Good work!");
+                        result = true;
+                        break;
+                    }
+                }
+                if (result == false){
+                    alert("You messed it up!");
+                    console.log(mix);
+                    mix = [];
+                }
+            }
+        });
 </script>
 </body>
 </html>
